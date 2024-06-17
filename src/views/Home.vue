@@ -5,26 +5,18 @@
         <Intro />
         <SearchBar />
         <PopularVideos />
-        <v-row class="info-text" >
-            <v-col>
-                <h2>Empowering You To Understand Your Options:</h2>
-            </v-col>
-            <v-col>
-                <p>It's difficult to find the right health information online, especially when trying trying to
-                    understand your options. With Medoh, things get easier. We're here to help you learn all the
-                    possible ways to improve your health, answer questions you have using Medoh AI and guide you to the
-                    providers for treatments you need.</p>
-            </v-col>
-        </v-row>
+        <Info />
+        <Topics />
     </v-main>
 </template>
 
 <script setup lang="ts">
+import Info from '../components/Info.vue';
 import Intro from '../components/Intro.vue';
 import Navbar from '../components/Navbar.vue';
 import PopularVideos from '../components/PopularVideos.vue';
 import SearchBar from '../components/SearchBar.vue';
-import { ref } from 'vue';
+import Topics from '../components/Topics.vue';
 
 </script>
 
@@ -41,7 +33,4 @@ $font-name: "poppins", sans-serif;
     gap: 40px;
 }
 
-.info-text {
-    margin: 0 10% 0 10%;
-}
 </style>

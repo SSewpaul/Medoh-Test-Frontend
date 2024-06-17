@@ -74,7 +74,6 @@ onMounted(() => get_featured_videos());
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        max-width: 50ch;
     }
 
     .popular-videos {
