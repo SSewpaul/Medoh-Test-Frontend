@@ -7,10 +7,12 @@
         <PopularVideos />
         <Info />
         <Topics />
+        <Experts />
     </v-main>
 </template>
 
 <script setup lang="ts">
+import Experts from '../components/Experts.vue';
 import Info from '../components/Info.vue';
 import Intro from '../components/Intro.vue';
 import Navbar from '../components/Navbar.vue';
@@ -32,5 +34,4 @@ $font-name: "poppins", sans-serif;
     overflow: auto;
     gap: 40px;
 }
-
 </style>
