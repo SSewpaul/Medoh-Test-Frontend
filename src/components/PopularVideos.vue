@@ -2,20 +2,20 @@
     <v-container class="popular-searches" fluid>
         <h2>Popular Searches</h2>
         <div class="popular-videos">
-            <v-col v-for="details in videos" :key="details.title">
+            <v-col v-for="details in featured_videos" :key="details.title">
                 <div class="inner-popular-video-container">
-                    <v-btn icon="mdi-play" class="play-btn"></v-btn>
+                    <v-btn icon="mdi-play" class="play-btn" :href="details.video_url"></v-btn>
                     <v-card width="250" height="275" class="popular-video-card">
-                        <v-img src="../assets/thumbnail.png" width="250" height="200" cover class="thumbnail"></v-img>
+                        <v-img :src="details.thumbnail_url" width="250" height="200" cover class="thumbnail"></v-img>
                         <v-card-item>
                             <v-card-title class="popular-video-title">
                                 {{ details.title }}
                             </v-card-title>
                             <v-card-text class="popular-video-metadata">
-                                <p class="popular-video-creator">{{details.creator}}</p>
+                                <p class="popular-video-creator">{{ details.doctor_id }}</p>
 
                                 <v-chip class="popular-video-injury-type">
-                                    {{details.injury_type}}
+                                    {{ details.video_type }}
                                 </v-chip>
                             </v-card-text>
                         </v-card-item>
@@ -26,47 +26,25 @@
     </v-container>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
+import { Ref, ref, onMounted } from 'vue';
+import axios from 'axios';
 
-export default defineComponent({
-    data() {
-        return {
-            videos: {
-                0: {
-                    'title': 'Can a rotator cuff tear cause numbness in your arm?',
-                    'thumbnail': '../assets/thumbnail.png',
-                    'creator': 'Didinger',
-                    'injury_type': 'rotator cuff'
-                },
-                1: {
-                    'title': 'Most epic injury or something',
-                    'thumbnail': '../assets/thumbnail.png',
-                    'creator': 'Didinger',
-                    'injury_type': 'rotator cuff'
-                },
-                2: {
-                    'title': 'How long can this actually get and what is the problem if we go past the number of characters',
-                    'thumbnail': '../assets/thumbnail.png',
-                    'creator': 'Didinger',
-                    'injury_type': 'rotator cuff'
-                },
-                3: {
-                    'title': 'How long can this actually get and what is the problem if we go past the number of characters',
-                    'thumbnail': '../assets/thumbnail.png',
-                    'creator': 'Didinger',
-                    'injury_type': 'rotator cuff'
-                },
-                4: {
-                    'title': 'How long can this actually get and what is the problem if we go past the number of characters',
-                    'thumbnail': '../assets/thumbnail.png',
-                    'creator': 'Didinger',
-                    'injury_type': 'rotator cuff'
-                }
-            }
-        }
-    }
-})
+const featured_videos: Ref<{ id: number, title: string, video_url: string, thumbnail_url: string, video_type: string, doctor_id: number, popular_video: boolean, featured_video: boolean }[]> = ref([]);
+
+const get_featured_videos = () => {
+    const featured_videos_url = 'http://localhost:8000/video/featured_videos/';
+
+    axios.get(featured_videos_url)
+        .then(response => {
+            return response.data;
+        })
+        .then(data => featured_videos.value = data)
+        .catch(error => console.log(error));
+};
+
+onMounted(() => get_featured_videos());
+
 </script>
 
 <style lang="scss">
@@ -123,16 +101,19 @@ export default defineComponent({
 
     .inner-popular-video-container:hover {
         .play-btn {
-            display: inline-block;
+            display: block;
             position: absolute;
-            right: 85px;
+            left: 50%;
+            -webkit-transform: translateX(-50%);
+            -moz-transform: translateX(-50%);
+            transform: translateX(-50%);
             bottom: 140px;
             z-index: 2;
             background-color: #fff5e5;
             color: #fb552f;
             width: 80px;
             height: 80px;
-            font-size: 30px;
+            font-size: 50px;
         }
 
         .popular-video-card {
