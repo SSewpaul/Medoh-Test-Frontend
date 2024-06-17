@@ -5,7 +5,7 @@
         <Intro />
         <SearchBar />
         <PopularVideos />
-        <v-row class="info-text">
+        <v-row class="info-text" >
             <v-col>
                 <h2>Empowering You To Understand Your Options:</h2>
             </v-col>
@@ -19,16 +19,12 @@
     </v-main>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import Intro from '../components/Intro.vue';
 import Navbar from '../components/Navbar.vue';
 import PopularVideos from '../components/PopularVideos.vue';
 import SearchBar from '../components/SearchBar.vue';
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-
-})
+import { ref } from 'vue';
 
 </script>
 
