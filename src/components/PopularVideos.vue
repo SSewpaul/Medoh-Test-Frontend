@@ -12,7 +12,7 @@
                                 {{ details.title }}
                             </v-card-title>
                             <v-card-text class="popular-video-metadata">
-                                <p class="popular-video-creator">{{ details.doctor_id }}</p>
+                                <p class="popular-video-creator">{{ details.doctor_name }}</p>
 
                                 <v-chip class="popular-video-injury-type">
                                     {{ details.video_type }}
@@ -30,7 +30,7 @@
 import { Ref, ref, onMounted } from 'vue';
 import axios from 'axios';
 
-const featured_videos: Ref<{ id: number, title: string, video_url: string, thumbnail_url: string, video_type: string, doctor_id: number, popular_video: boolean, featured_video: boolean }[]> = ref([]);
+const featured_videos: Ref<{ id: number, title: string, video_url: string, thumbnail_url: string, video_type: string, doctor_name: string, popular_video: boolean, featured_video: boolean }[]> = ref([]);
 
 const get_featured_videos = () => {
     const featured_videos_url = 'http://localhost:8000/video/featured_videos/';
